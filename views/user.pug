@@ -1,0 +1,79 @@
+extends layout
+
+block content
+  br
+  .w3-container
+    .w3-card-4.w3-center(style="padding: 15px;")
+      img(src=user.picture)
+      p Welcome #{user.nickname}
+      div
+        button(id="check-session") Check Session
+        button(id="get-profile") Get Profile
+        button(id="get-contacts") List Contacts
+        button(id="get-appointments") List Appointments
+        div(id="results")
+          pre
+  script.
+
+    const auth0WebAuth = new auth0.WebAuth({
+      domain: '#{env.AUTH0_DOMAIN}',
+      clientID: '#{env.AUTH0_CLIENT_ID}',
+      redirectUri: '#{env.AUTH0_CALLBACK_URL}',
+      audience: 'https://#{env.AUTH0_DOMAIN}/userinfo',
+      scope: 'openid profile email'
+    });
+
+    function checkSession () {
+      auth0WebAuth.checkSession({
+        responseType: 'token',
+      }, function (err, result) {
+        if (err) {
+          console.log(`checkSession failed (${err.error}). Redirecting to login page...`);
+          window.location = '#{env.LOGOUT_URL}';
+        }
+      });
+    }
+
+    setInterval(function() {
+      // periodically check for SSO status
+      // for example, here every 2 mins
+      checkSession();
+    }, 120000);
+
+    $('#check-session').on('click', function(e) {
+      e.preventDefault();
+      checkSession();
+    });
+
+    $('#get-profile').on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "#{env.APP_BASE_URL}/api/userinfo",
+        method: "GET",
+        success: function (data) {
+          $('#results pre').text(JSON.stringify(data, null, 2))
+        }
+      });
+    });
+
+    $('#get-appointments').on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "#{env.APP_BASE_URL}/api/appointments",
+        method: "GET",
+        success: function (data) {
+          $('#results pre').text(JSON.stringify(data, null, 2))
+        }
+      });
+    });
+
+    $('#get-contacts').on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "#{env.APP_BASE_URL}/api/contacts",
+        method: "GET",
+        success: function (data) {
+          $('#results pre').text(JSON.stringify(data, null, 2))
+        }
+      });
+    });
