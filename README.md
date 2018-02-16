@@ -1,4 +1,4 @@
-# Auth0 Regular Webapp Embedded Login With Sso And Api
+# Auth0 Regular Webapp with multiple passport strategies
 
 This is the demonstration app for showing how a Regular Web App can integrate and allow login from 2 Auth0 tenants.
 This is a one-stop shop for illustrating:
