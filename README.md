@@ -1,6 +1,6 @@
 # Auth0 Regular Webapp Embedded Login With Sso And Api
 
-This is the ultimate OIDC / Oauth2 demonstration app for Regular Web App integration with Auth0.
+This is the demonstration app for showing how a Regular Web App can integrate and allow login from 2 Auth0 tenants.
 This is a one-stop shop for illustrating:
 
 1. Centralised Login usage

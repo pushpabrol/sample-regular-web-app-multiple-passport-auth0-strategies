@@ -1,7 +1,7 @@
 {
   "name": "auth0-regular-webapp-login-with-sso-and-api",
   "version": "1.0.0",
-  "description": "Regular webapp with embedded and centralised login & multiple APIs in Auth0. Uses Lock v11, and Auth0.js v9",
+  "description": "Regular webapp with 2 auth0 passport strategies in the same app",
   "repository": "git://github.com/auth0-samples/auth0-regular-webapp-embedded-login-with-sso-and-api",
   "author": "Auth0",
   "license": "MIT",
